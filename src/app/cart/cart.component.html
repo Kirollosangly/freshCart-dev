@@ -1,0 +1,42 @@
+
+<div *ngIf="isZero" class="empty1 p-4 my-4 w-75 mx-auto">
+    <div class="inner-image text-center">
+        <img src="assets/empty1.png" alt="">
+    </div>
+    <div class="txt text-center fs-4">
+        <p>Looks like you have not added anything to your cart, Go ahead & explore our top categories</p>
+    </div>
+    <div class="text-center">
+        <button class="empty1-btn rounded-2 py-4 mx-auto d-flex justify-content-center align-items-center">
+            <a routerLink="/products" class="m-0 d-block p-0 text-white">Shop our products</a>
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!isZero" class="bg-main-light p-4 mx-4 my-4">
+    <h3>Shop Cart</h3>
+    <h6 class="text-main fw-semibold">Total Price: <span>{{cartItems?.totalCartPrice | currency : 'EGP '}} </span></h6>
+    <div *ngFor="let product of cartItems?.products" class="row align-items-center">
+        <div class="col-md-1 rounded-2">
+            <img [src]="product.product.imageCover" class="w-100 rounded-2" alt="">
+        </div>
+        <div class="col-md-11 prod-details d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="fw-semibold">{{product.product.title}}</h6>
+                <h6 class="text-main">{{product.price | currency : 'EGP '}} Per unit</h6>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <button (click)="updateItems(product.product._id, product.count+1)" class="fw-semibold border-main rounded-1 fs-5 mx-2">+</button>
+                <span class="d-inline-flex justify-content-center align-items-center rounded-1">{{product.count == 0 ? removeItem(product.product._id) : product.count}}</span>
+                <button (click)="updateItems(product.product._id, product.count-1)" class="fw-semibold border-main rounded-1 fs-5 mx-2">-</button>
+                <button (click)="removeItem(product.product._id)" class="border-0 d-flex justify-content-center align-items-center m-0 p-0"><i class="fa-regular fa-trash-can fs-4 text-danger"></i> </button>
+            </div>
+        </div>
+        <hr class="my-4">
+    </div>
+    <div class="payment">
+        <a [routerLink]="['/checkout', cartItems?._id]">
+            <button type="button" class="btn rounded-5 fw-semibold bg-main text-white">Check out</button>
+        </a>
+    </div>
+</div>

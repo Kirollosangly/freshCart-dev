@@ -1,0 +1,29 @@
+
+<div *ngIf="wishlistempty" class="emptywishlist p-4 my-4">
+    <div class="inner-image text-center">
+        <img src="assets/emptywishlist.jpg" alt="">
+    </div>
+    <div class="txt text-center fs-5">
+        <p>No items in wishlist, Save your favorite items here</p>
+    </div>
+</div>
+
+
+<div *ngIf="!wishlistempty" class="row mx-auto px-2">
+    <h2 class="fw-semibold fs-h4 my-4">My Wishlist</h2>
+    <div *ngFor="let product of myWishList" class="col-md-2 g-2 my-4">
+        <div class="product p-2 overflow-hidden cursor-pointer">
+            <button type="button" class="btn" (click)="removeWishList(product.id)"><i class="fa-solid fa-trash-can"></i></button>
+            <a [routerLink]="['/productDetails', product._id]">
+                <img [src]="product.imageCover" class="w-100" alt="">
+                <span class="text-main fw-semibold font-sm">{{product?.category?.name}}</span>
+                <h3 class="h6 fw-semibold">{{product.title.split(' ').slice(0, 2).join(' ')}}</h3>
+                <div class="font-sm d-flex justify-content-between align-items-center">
+                    <span class="text-muted">{{product.price | currency : "EGP "}}</span>
+                    <span><i class="fa-solid fa-star rating-color mx-1"></i>{{product.ratingsAverage}}</span>
+                </div>
+            </a>
+            <button (click)="addPro(product._id)" class="btn bg-main text-white w-100"><span class="mx-1">+</span>Add</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="row mx-auto px-1">
+    <!-- <div class="my-4 search-input">
+        <input [(ngModel)]="searchTerm" type="text" placeholder="Search by Name ..." class="form-control w-75 mx-auto my-">
+    </div> -->
+    <h2 class="fw-semibold fs-h4 my-4">All Brands</h2>
+    <div *ngFor="let brand of brands" class="col-md-2 g-2 my-4">
+        <div class="product p-2 overflow-hidden cursor-pointer" [id]="brand._id">
+            <a>
+                <img [src]="brand.image" class="w-100" alt="">
+                <span class="text-main fw-semibold font-sm">{{brand?.name}}</span>
+            </a>
+        </div>
+    </div>
+    <div class="pages text-center py-2">
+        <button class="btn btn-page mx-2 ON" (click)="getBrand(num)" *ngFor="let num of numberOfPages">{{num}}</button>
+    </div>
+</div>

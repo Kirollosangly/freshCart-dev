@@ -1,0 +1,4 @@
+.register-form input:focus {
+    border-color: #0aad0a81;
+    box-shadow: 0 0 0 1px #0aad0a81;
+}

@@ -1,0 +1,41 @@
+#cart{
+    position: relative;
+}
+
+#cart-circ{
+    width: 18px;
+    height: 18px;
+    border: 2px solid #0aad0a;
+    position: absolute;
+    top: -3px;
+    right: 17px;
+    font-size: 10px;
+}
+
+#cart img {
+    width: 2rem;
+}
+
+#wishlist i {
+    color: #0aad0a;
+}
+
+#crt-btn:active {
+    border-color: transparent !important;
+}
+
+.loader-container {
+    position: fixed;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-container img {
+    width: 4rem;
+}

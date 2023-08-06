@@ -1,0 +1,51 @@
+<div *ngIf="_LoaderService.isLoading | async" class="loader-container">
+    <!-- <mat-progress-bar  class="prog" mode="indeterminate"></mat-progress-bar> -->
+    <img src="assets/loading.gif" alt="">
+</div>
+<nav class="navbar navbar-expand-sm navbar-light bg-main-light">
+    <div class="container mt-2">
+        <a class="navbar-brand" routerLink="/home"><img src="assets/freshcart-logo.svg" alt=""></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul *ngIf="isLogin" class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item"><a class="nav-link text-capitalize" routerLink="/home" routerLinkActive="active">home</a></li>
+                <li class="nav-item"><a class="nav-link text-capitalize" routerLink="/products" routerLinkActive="active">products</a></li>
+                <li class="nav-item"><a class="nav-link text-capitalize" routerLink="/categories" routerLinkActive="active">categories</a></li>
+                <li class="nav-item"><a class="nav-link text-capitalize" routerLink="/brands" routerLinkActive="active">brands</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto mt-2 mt-lg-0 d-flex flex-row flex-md-row justify-content-center align-items-center">
+                <li *ngIf="!isLogin" class="nav-item"><a class="nav-link text-capitalize" routerLink="/login" routerLinkActive="active">login</a></li>
+                <li *ngIf="!isLogin" class="nav-item"><a class="nav-link text-capitalize" routerLink="/register" routerLinkActive="active">register</a></li>
+                <li *ngIf="isLogin" id="wishlist" class="nav-item"><a routerLink="/wishlist" routerLinkActive="active"><i class="fa-regular fa-heart fs-5 fw-semibold"></i></a></li>
+                <li *ngIf="isLogin" id="cart" class="nav-item">
+                    <a routerLink="/cart" routerLinkActive="active" (click)="userCart()">
+                        <button id="crt-btn" type="button" class="btn position-relative">
+                            <i class="fa-solid fa-cart-shopping text-main fs-5"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{navProNums}}
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+                    </a>
+                </li>
+                <!-- <li *ngIf="isLogin" id="cart" class="nav-item">
+                    <a class="nav-link text-capitalize" routerLink="/cart" routerLinkActive="active" (click)="userCart()">
+                        <img src="assets/cartLogo.png" class="">
+                    </a>
+                    <span id="cart-circ" class="rounded-circle d-flex justify-content-center align-items-center fw-semibold">{{productsNum}}</span>
+                </li> -->
+                <li *ngIf="isLogin" class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-gear fs-5"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item"><a class="nav-link text-capitalize" routerLink="/allorders" routerLinkActive="active">My Orders</a></li>
+                        <li *ngIf="isLogin" class="nav-item"><a class="nav-link text-capitalize cursor-pointer" routerLink="settings" routerLinkActive="active">Settings</a></li>
+                        <li *ngIf="isLogin" class="nav-item"><a class="nav-link text-capitalize cursor-pointer" (click)="logoutBridge()">logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

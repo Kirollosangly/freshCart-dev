@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="w-75 mx-auto py-4">
+        <h4>Register Now </h4>
+        <div  *ngIf="errorMsg" class="alert alert-danger">
+            {{errorMsg}}
+        </div>
+        <form [formGroup]="registerFrom" class="register-form" (ngSubmit)="registerUser(registerFrom)">
+            <label for="name" class="text-capitalize mt-2 mb-1">name</label>
+            <input formControlName="name" type="text" id="name" class="form-control">
+            <div *ngIf="registerFrom.get('name')?.errors && registerFrom.get('name')?.touched" class="alert alert-danger my-1">
+                <p class="m-0" *ngIf="registerFrom.get('name')?.getError('required')|json">Name is Required</p>
+                <p class="m-0" *ngIf="registerFrom.get('name')?.getError('minlength')|json">Name Minimum Length is 3</p>
+                <p class="m-0" *ngIf="registerFrom.get('name')?.getError('maxlength')|json">Name Maximum Length is 16</p>
+            </div>
+
+            <label for="email" class="text-capitalize mt-2 mb-1">email</label>
+            <input formControlName="email" type="text" id="email" class="form-control">
+            <div *ngIf="registerFrom.get('email')?.errors && registerFrom.get('email')?.touched" class="alert alert-danger my-1">
+                <p class="m-0" *ngIf="registerFrom.get('email')?.getError('required')|json">Email is Required</p>
+                <p class="m-0" *ngIf="registerFrom.get('email')?.getError('email')|json">Email is not Valid</p>
+            </div>
+
+            <label for="password" class="text-capitalize mt-2 mb-1">password</label>
+            <input formControlName="password" type="password" id="password" class="form-control">
+            <div *ngIf="registerFrom.get('password')?.errors && registerFrom.get('password')?.touched" class="alert alert-danger my-1">
+                <p class="m-0" *ngIf="registerFrom.get('password')?.getError('required')|json">Password is Required</p>
+                <p class="m-0" *ngIf="registerFrom.get('password')?.getError('pattern')|json">Password First Letter Must be Capital and contains A-Z a-z 0-9 | Password Length from 8 to 16</p>
+            </div>
+
+            <label for="rePassword" class="text-capitalize mt-2 mb-1">rePassword</label>
+            <input formControlName="rePassword" type="password" id="rePassword" class="form-control">
+             <div *ngIf="registerFrom.get('rePassword')?.errors && registerFrom.get('rePassword')?.touched" class="alert alert-danger my-1">
+                <p class="m-0" *ngIf="registerFrom.get('rePassword')?.getError('required')|json">rePassword is Required</p>
+                <p class="m-0" *ngIf="registerFrom.get('rePassword')?.getError('pattern')|json">rePassword First Letter Must be Capital and contains A-Z a-z 0-9 | Password Length from 8 to 16</p>
+            </div>
+
+            <label for="phone" class="text-capitalize mt-2 mb-1">phone</label>
+            <input formControlName="phone" type="text" id="phone" class="form-control">
+            <div *ngIf="registerFrom.get('phone')?.errors && registerFrom.get('phone')?.touched" class="alert alert-danger my-1">
+                <p class="m-0" *ngIf="registerFrom.get('phone')?.getError('required')|json">Phone is Required</p>
+                <p class="m-0" *ngIf="registerFrom.get('phone')?.getError('pattern')|json">Phone is not Valid</p>
+            </div>
+
+            <div class="text-end">
+                <button [disabled]="registerFrom.invalid" type="submit" class="btn bg-main text-white my-4">
+                    <i *ngIf="isLoading" class="fa-solid fa-spinner fa-spin"></i>
+                    <span *ngIf="!isLoading">Register</span></button>
+            </div>
+        </form>
+    </div>
+</div>

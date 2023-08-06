@@ -1,0 +1,25 @@
+<div class="row mx-auto px-4">
+    <div class="mb-2 mt-5 search-input mx-auto">
+        <input [(ngModel)]="searchTerm" type="text" placeholder="Search by Name ..." class="form-control w-75 mx-auto my-2">
+    </div>
+    <div *ngFor="let product of products |search : searchTerm" class="col-md-2 g-2 my-4">
+        <div class="product p-2 overflow-hidden cursor-pointer">
+            <button (click)="addWishList(product._id)" type="button" class="btn"><i id="favList" class="fa-regular fa-heart"></i></button>
+            <a [routerLink]="['/productDetails', product._id]">
+                <img [src]="product.imageCover" class="w-100" alt="">
+                <span class="text-main fw-semibold font-sm">{{product?.category?.name}}</span>
+                <h3 class="h6 fw-semibold">{{product.title.split(' ').slice(0, 2).join(' ')}}</h3>
+                <!-- <p *ngIf="product.description.split(' ').length <= 8">{{product.description}}</p>
+                    <p *ngIf="product.description.split(' ').length > 8"> {{product.description.split(' ')slice(0, 8).join(' ')}}...</p> -->
+                <div class="font-sm d-flex justify-content-between align-items-center">
+                    <span class="text-muted">{{product.price | currency : "EGP "}}</span>
+                    <span><i class="fa-solid fa-star rating-color mx-1"></i>{{product.ratingsAverage}}</span>
+                </div>
+            </a>
+            <button (click)="addPro(product._id)" class="btn bg-main text-white w-100"><span class="mx-1">+</span>Add</button>
+        </div>
+    </div>
+    <div class="pages text-center py-2 w-75 mx-auto">
+        <button class="btn btn-page mx-2 ON" (click)="getAllPro(num)"  *ngFor="let num of numberOfPages">{{num}}</button>
+    </div>
+</div>
